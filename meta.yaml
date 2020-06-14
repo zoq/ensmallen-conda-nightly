@@ -1,0 +1,52 @@
+{% set name = "ensmallen" %}
+{% set version = "2.12.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/mlpack/ensmallen/archive/{{ version }}.tar.gz
+  sha256: 9d574de6a7096282502113bd80fe8d8ebdbbf0118b01c7fe7298b92f5f47e53b
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake
+    - ninja  # [win]
+  host:
+    - armadillo >=8.400.0
+    - libblas
+    - openmp
+  run:
+    - armadillo
+    - openmp
+
+test:
+  commands:
+    - test -f $PREFIX/include/ensmallen.hpp                    # [unix]
+    - test -d $PREFIX/include/ensmallen_bits                   # [unix]
+    - if not exist %LIBRARY_INC%\\ensmallen.hpp exit 1         # [win]
+    - if not exist %LIBRARY_INC%\\ensmallen_bits exit 1        # [win]
+about:
+  home: http://ensmallen.org/
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: COPYRIGHT.txt
+  summary: ensmallen is a C++ header-only library for mathematical optimization.
+  description: |
+    ensmallen provides a simple set of abstractions for writing an objective 
+    function to optimize. It     also provides a large set of standard and 
+    cutting-edge optimizers that can be used for virtually any mathematical 
+    optimization task. These include full-batch gradient descent techniques, 
+    small-batch techniques, gradient-free optimizers, and constrained optimization.
+  doc_url: http://ensmallen.org/docs.html
+  dev_url: https://github.com/mlpack/ensmallen
+
+extra:
+  recipe-maintainers:
+    - zoq 
