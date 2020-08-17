@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/mlpack/ensmallen/archive/master.tar.gz
-  sha256: e0cb4dbfe9e9017c6609f195777ea1cf3e4592fe883366066c92d118160a007a
+  sha256: d6ec9d20ba12cdac27d105024d512fffd825a351dbfff61399608188bd3a6852
 
 build:
   number: 0
